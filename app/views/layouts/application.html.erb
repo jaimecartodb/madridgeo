@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Madridgeo</title>
+	  <meta charset="UTF-8">
+	  <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+	  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+	  <%= stylesheet_link_tag    'application', media: 'all' %>
+	  <%= csrf_meta_tags %>
+
+			<style>
+
+				html, body{
+					height: 100%;
+					padding: 0%;
+					margin: 0%;
+				}
+				#map {
+					height: 100%;
+					padding: 0%;
+					margin-left: 25%;
+				}
+				#dashboard {
+					height: 0%;
+					padding: 0%;
+					margin-right: 0%;
+					border-right: 2px solid #333;
+				}
+			</style>
+
+	</head>
+	<body>
+
+		<%= yield %>
+
+	</body>
+</html>
