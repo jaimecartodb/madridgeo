@@ -8,10 +8,14 @@
         	            <input type="checkbox" id="vias_ciclistas" name="layer">
         	            <label for="vias_ciclistas">Vias Ciclistas</label>
         	        </li>
-        		  </ul>
+        	        <li class="layer">
+        	            <input type="checkbox" id="carril_bus" name="layer">
+        	            <label for="carril_bus">Carril Bus</label>
+        	        </li>
+        	      </ul>
 
         	</asside>
    		</div>		
    		<div id="map"></div>
 		<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
-   		<%= javascript_include_tag 'mapa.js' %>
+   		 <%= javascript_include_tag 'mapa' %>

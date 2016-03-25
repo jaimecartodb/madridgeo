@@ -15,13 +15,9 @@
    		               sql: 'SELECT * from table_130111_vias_ciclistas',
    		               cartocss: '#table_130111_vias_ciclistas { line-color: #0080ff; line-width: 3;}'
    		             },
-   		             'bici_mad01': {
-   		               sql: 'SELECT * FROM bici_mad01',
-                        cartocss: '#bici_mad01{marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 1.5; marker-width: 10; marker-fill: #3B007F; }'
-   		             },
-   		             'aloja': {
-   		               sql: 'SELECT * FROM aloj_ocio_btn100',
-   		               cartocss: '#aloj_ocio_btn100{marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 1.5; marker-width: 10; marker-fill: #3B007F; }'
+   		             'carril_bus': {
+   		               sql: 'SELECT * FROM bus',
+   		               cartocss: '#bus{line-color: #FF6600; line-width: 2; line-opacity: 0.7;}'
    		             }
    		           }
 
