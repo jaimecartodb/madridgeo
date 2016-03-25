@@ -18,7 +18,39 @@
    		             'carril_bus': {
    		               sql: 'SELECT * FROM bus',
    		               cartocss: '#bus{line-color: #FF6600; line-width: 2; line-opacity: 0.7;}'
-   		             }
+   		             },
+                      'camaras': {
+                        sql: 'SELECT * FROM camaras',
+                        cartocss: '#camaras{marker-fill-opacity: 0.9; marker-fill: #FF6600; marker-allow-overlap: true;}'
+                      },
+                      'incidentes_trafico': {
+                        sql: 'SELECT * FROM incidentes_trafico',
+                        cartocss: '#incidentes_trafico{marker-fill-opacity: 0.9; marker-fill: #0080ff; marker-allow-overlap: true;}'
+                      },
+                      'estaciones_tren': {
+                        sql: 'SELECT * FROM estaciones_tren',
+                        cartocss: '#estaciones_tren{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+                      },
+                      'autobuses_urbanos': {
+                        sql: 'SELECT * FROM autobuses_urbanos',
+                        cartocss: '#autobuses_urbanos{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+                      },
+                      'autobuses_interurbanos': {
+                        sql: 'SELECT * FROM autobuses_interurbanos',
+                        cartocss: '#autobuses_interurbanos{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+                      },
+                      'paradas_metro': {
+                        sql: 'SELECT * FROM paradas_metro',
+                        cartocss: '#paradas_metro{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+                      },
+                      'paradas_metro_ligero': {
+                        sql: 'SELECT * FROM paradas_metro_ligero',
+                        cartocss: '#paradas_metro_ligero{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+                      },
+                      'paradas_taxi': {
+                        sql: 'SELECT * FROM paradas_taxi',
+                        cartocss: '#paradas_taxi{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+                      },
    		           }
 
    		           // Empty layer
