@@ -5,28 +5,26 @@ $( document ).on('ready', function(){
   var map =  L.map('map', {
     zoomControl: true,
     center: [40.4000, -3.7167],
-    zoom: 12
-  }).locate({setView: true, mazZoom: 16});
+    searchbox: true,
+    zoom: 12,
+  });
+
 
   var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
   }).addTo(map);
 
-//  map.locate({setView: true, maxZoom: 8});
+  // var basemap2 =  L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+  //     attribution: 'Dark'
+  //   });
+  // var osm = {
+  //   'osm basemap': basemap
+  // };
+  // var dark_matter = {
+  //   'dark_matter': basemap2
+  // };
 
-    //ernesmb
-    //oriolbx
-
-      // if (navigator.geolocation){
-      //   navigator.geolocation.getCurrentPosition(showPosition);
-      //   console.log("location found!");
-      // } else {
-      //   alert("Geolocation is not available in this browser");
-      // };
-
-      // function showPosition(position){
-      //   map.setView([position.coords.latitude, position.coords.longitude], 16);
-      // };
+  // L.control.layers(osm, dark_matter).addTo(map);
 
 
   map.locate({setView:true, watch:false, maxZoom: 13})
@@ -42,10 +40,6 @@ $( document ).on('ready', function(){
     }
   });
 
-  // map.locate({setView:true, watch:false})
-  // .on('locationfound', function(l){
-  // });
-      
 
   $('#locate_me').click(function(){
     if (navigator.geolocation){
@@ -59,115 +53,159 @@ $( document ).on('ready', function(){
     map.setView([position.coords.latitude, position.coords.longitude], 16);
   };
 
-  $(function() {
-     $( "#slider-range-min" ).slider({
-       range: "min",
-       value: 100,
-       min: 100,
-       max: 10000,
-       slide: function( event, ui ) {
-         $( "#amount" ).val(ui.value + meters);
-       }
-     });
-     $( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
-   });
-            
+    var layers = {
+     	'cyclist_routes': {
+     		sql: 'SELECT * from table_130111_vias_ciclistas',
+     		cartocss: '#table_130111_vias_ciclistas { line-color: #0080ff; line-width: 3;}'
+     	},
+     	'bus_path': {
+     	  sql: 'SELECT * FROM bus',
+     		cartocss: '#bus{line-color: #FF6600; line-width: 2; line-opacity: 0.7;}'
+     	},
+      'traffic_cameras': {
+        sql: 'SELECT * FROM camaras',
+        cartocss: '#camaras{marker-fill-opacity: 0.9; marker-fill: #FF6600; marker-allow-overlap: true;}'
+      },
+      'traffic_incidents': {
+        sql: 'SELECT * FROM incidentes_trafico',
+        cartocss: '#incidentes_trafico{marker-fill-opacity: 0.9; marker-fill: #0080ff; marker-allow-overlap: true;}'
+      },
+      'train_stations': {
+        sql: 'SELECT * FROM estaciones_tren',
+        cartocss: '#estaciones_tren{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+      },
+      'urban_buses': {
+        sql: 'SELECT * FROM autobuses_urbanos',
+        cartocss: '#autobuses_urbanos{ marker-fill-opacity: 0.9; marker-fill: #7B00B4;}'
+      },
+      'interurban_buses': {
+        sql: 'SELECT * FROM autobuses_interurbanos',
+        cartocss: '#autobuses_interurbanos{ marker-fill-opacity: 0.9; marker-fill: #000000;}'
+      },
+      'metro_stops': {
+        sql: 'SELECT * FROM paradas_metro',
+        cartocss: '#paradas_metro{ marker-fill-opacity: 0.9; marker-fill: #FFCC00;}'
+      },
+      'light_metro_stops': {
+        sql: 'SELECT * FROM paradas_metro_ligero',
+        cartocss: '#paradas_metro_ligero{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+      },
+      'taxi_stops': {
+        sql: 'SELECT * FROM paradas_taxi',
+        cartocss: '#paradas_taxi{ marker-fill-opacity: 0.9; marker-fill: #055D00;}',
+        interactivity: 'cartodb_id, name'
+      }
+    };
 
-          // if("geolocation" in navigator){
-          //       var button = document.getElementById('locate_me');
-          //       button.addEventListener('click', getLocation);
-          //       console.log("yes, there is navigation!!!")
-          //   } else {
-          //       alert("Geolocation is not available in this browser")
-          //   }
+    // {
+    //   'cyclist_routes': ['cartodb_id, mass'],
+    //   'bus_path': {
+    //     sql: 'SELECT * FROM bus',
+    //     cartocss: '#bus{line-color: #FF6600; line-width: 2; line-opacity: 0.7;}'
+    //   },
+    //   'traffic_cameras': {
+    //     sql: 'SELECT * FROM camaras',
+    //     cartocss: '#camaras{marker-fill-opacity: 0.9; marker-fill: #FF6600; marker-allow-overlap: true;}'
+    //   },
+    //   'traffic_incidents': {
+    //     sql: 'SELECT * FROM incidentes_trafico',
+    //     cartocss: '#incidentes_trafico{marker-fill-opacity: 0.9; marker-fill: #0080ff; marker-allow-overlap: true;}'
+    //   },
+    //   'train_stations': {
+    //     sql: 'SELECT * FROM estaciones_tren',
+    //     cartocss: '#estaciones_tren{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+    //   },
+    //   'urban_buses': {
+    //     sql: 'SELECT * FROM autobuses_urbanos',
+    //     cartocss: '#autobuses_urbanos{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+    //   },
+    //   'interurban_buses': {
+    //     sql: 'SELECT * FROM autobuses_interurbanos',
+    //     cartocss: '#autobuses_interurbanos{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+    //   },
+    //   'metro_stops': {
+    //     sql: 'SELECT * FROM paradas_metro',
+    //     cartocss: '#paradas_metro{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+    //   },
+    //   'light_metro_stops': {
+    //     sql: 'SELECT * FROM paradas_metro_ligero',
+    //     cartocss: '#paradas_metro_ligero{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
+    //   },
+    //   'taxi_stops': {
+    //     sql: 'SELECT * FROM paradas_taxi',
+    //     cartocss: '#paradas_taxi{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}',
+    //     interactivity: 'cartodb_id, name'
+    //   }
+    // }
 
-          //   function getLocation(){
-          //       console.log('Getting location...'); 
-          //       navigator.geolocation.getCurrentPosition(onLocation, onError, options);
-          //   }
-
-          //   var options = {
-          //       enableHighAccuracy: true,
-          //       timeout: 5000,
-          //       maximumAge: 0
-          //   }
-
-          //   function onLocation(position){
-          //       console.log("got it!");
-          //       var lat = position.coords.latitude;
-          //       var lon = position.coords.longiture;
-          //       document.getElementById('location').innerHTML = "Your posititon is " + lat + " latitude and " + lon + " longitude.";
-          //   }
-
-          //   function onError(error){
-          //       console.log("Getting location failed: " + error);
-          //   }
+    // $(function() {
+    //        $( "#slider-range-min" ).slider({
+    //          range: "min",
+    //          value: 70,
+    //          min: 0,
+    //          max: 100,
+    //          slide: function( event, ui ) {
+    //            $( "#amount" ).val(ui.value + "%" );
+    //            op = $( "#slider-range-min" ).slider( "value" ) / 100;
+    //            layer.setOpacity(op);
+    //          }
+    //        });
+    //        $( "#amount" ).val( $( "#slider-range-min" ).slider( "value" ) + "%");
+    //      });
+    // })
+    // .error(function(err) {
+    //     console.log("error: " + err);
+    // });
 
 
 
-     		    var layers = {
-     		             'vias_ciclistas': {
-     		               sql: 'SELECT * from table_130111_vias_ciclistas',
-     		               cartocss: '#table_130111_vias_ciclistas { line-color: #0080ff; line-width: 3;}'
-     		             },
-     		             'carril_bus': {
-     		               sql: 'SELECT * FROM bus',
-     		               cartocss: '#bus{line-color: #FF6600; line-width: 2; line-opacity: 0.7;}'
-     		             },
-                        'camaras': {
-                          sql: 'SELECT * FROM camaras',
-                          cartocss: '#camaras{marker-fill-opacity: 0.9; marker-fill: #FF6600; marker-allow-overlap: true;}'
-                        },
-                        'incidentes_trafico': {
-                          sql: 'SELECT * FROM incidentes_trafico',
-                          cartocss: '#incidentes_trafico{marker-fill-opacity: 0.9; marker-fill: #0080ff; marker-allow-overlap: true;}'
-                        },
-                        'estaciones_tren': {
-                          sql: 'SELECT * FROM estaciones_tren',
-                          cartocss: '#estaciones_tren{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-                        },
-                        'autobuses_urbanos': {
-                          sql: 'SELECT * FROM autobuses_urbanos',
-                          cartocss: '#autobuses_urbanos{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-                        },
-                        'autobuses_interurbanos': {
-                          sql: 'SELECT * FROM autobuses_interurbanos',
-                          cartocss: '#autobuses_interurbanos{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-                        },
-                        'paradas_metro': {
-                          sql: 'SELECT * FROM paradas_metro',
-                          cartocss: '#paradas_metro{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-                        },
-                        'paradas_metro_ligero': {
-                          sql: 'SELECT * FROM paradas_metro_ligero',
-                          cartocss: '#paradas_metro_ligero{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-                        },
-                        'paradas_taxi': {
-                          sql: 'SELECT * FROM paradas_taxi',
-                          cartocss: '#paradas_taxi{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-                        },
-     		           }
 
    		           // Empty layer
-     		           cartodb.createLayer(map,{
-     		               user_name: 'jaimedemora',
-     		               type: 'cartodb',
-     		               sublayers: []
-     		             })
-     		             .addTo(map)
-     		             .done(function(layer){
-     		               // When the layers inputs change fire this
-     		               $("input[name='layer']").change(function(){
-
-     		                 // Clear the sublayers
-     		                 layer.getSubLayers().forEach(function(sublayer){sublayer.remove()});
-
-     		                 // For every check activated, add a sublayer
-     		                 $.each($("input[name='layer']:checked"), function(){
-     		                     layer.createSubLayer(layers[$(this).attr("id")]);
-     		                 });
-     		               });
-     		           });
+    cartodb.createLayer(map,{
+     	user_name: 'jaimedemora',
+     	type: 'cartodb',
+     	sublayers: []
+    })
+    .addTo(map)
+    .done(function(layer){
+     	$("input[name='layer']").change(function(){
+     		layer.getSubLayers().forEach(function(sublayer){sublayer.remove()});
+     		$.each($("input[name='layer']:checked"), function(){
+     		  layer.createSubLayer(layers[$(this).attr("id")]);
+          var numSubLayers = layer.getSubLayerCount();
+          cdb.vis.Vis.addInfowindow(map, layer.getSubLayer(numSubLayers-1), ['cartodb_id']);
+     		});
 
 
-   		});
+      // var LayerActions = {
+      //   default: function(){
+      //     if (map.hasLayer(basemap) || (map.hasLayer(basemap2))){
+      //       map.removeLayer(basemap);
+      //       map.removeLayer(basemap2);
+      //     } 
+
+      //     map.addLayer(basemap1);
+      //     return true;
+      //   },
+
+      //   stamen: function(){
+      //     if (map.hasLayer(basemap) || (map.hasLayer(basemap2))){
+      //       map.removeLayer(basemap);
+      //       map.removeLayer(basemap2);
+      //     }
+
+      //     map.addLayer(basemap2);
+      //     return true;
+      //   }
+      // }
+      
+      $('#selector').change(function() {
+        LayerActions[$(this).val()]();
+      });
+      });
+      var v = cdb.vis.Overlay.create('search', map.viz, {})
+      v.show();
+      $('#map').append(v.render().el);
+    });
+
+});

@@ -1,0 +1,109 @@
+<!-- Popular / About oriolbx’s Block bbadc6aa0b5a8e133792
+Updated October 21, 2015
+dropdown menu layer selector
+
+Open
+index.html# -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dropdown menu selector layer</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      #selector_menu{
+      	position: absolute;
+      	top: 20px;
+      	left: 20px;
+      	z-index: 9000;
+      }
+    </style>
+    <!-- include cartodb css  -->
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+  </head>
+<body>
+	<div id='map'></div>
+	<div id='selector_menu'>
+		<select id='selector'>
+			<option value='reset'>Reset</option>
+			<option value='layer1'>Layer 1</option>
+			<option value = 'layer2'>Layer 2</option>
+			<option value = 'layer3'>Layer 2</option>
+			<option value = 'layer4'>Layer 2</option>
+			<option value = 'layer5'>Layer 2</option>
+			<option value = 'layer6'>Layer 2</option>
+			<option value = 'layer7'>Layer 2</option>
+			<option value = 'layer8'>Layer 2</option>
+			<option value = 'layer9'>Layer 2</option>
+			<option value = 'layer10'>Layer 2</option>
+			<option value = 'layer11'>Layer 2</option>
+			<option value = 'layer12'>Layer 2</option>
+		</select>
+
+	</div>	
+	<script>
+		
+		function init(){
+
+			var sublayer;
+			// create leaflet map and define some properties
+        var map = L.map('map', { 
+          zoomControl: false,
+          center: [43, 0],
+          zoom: 3
+        })
+
+        // add a base layer to map
+        L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+          attribution: 'Stamen'
+        }).addTo(map);
+
+			var layerUrl = 'https://team.cartodb.com/u/oboix/api/v2/viz/803755b2-3ab5-11e5-bf84-0e0c41326911/viz.json' ;
+			cartodb.createLayer(map,layerUrl)
+				.addTo(map)
+				.on('done', function(layer){
+					sublayer = layer.getSubLayer(0);
+
+					var LayerActions = {
+						reset: function(){
+							sublayer.setSQL("SELECT * FROM world_table");
+							sublayer.setCartoCSS("#world_table {polygon-fill: #FF6600;polygon-opacity: 0;line-color: #FFF;line-width: 0.5;line-opacity: 1;}");
+						},
+						layer1: function(){
+							sublayer.setSQL("SELECT * FROM world_table WHERE cartodb_id < 100");
+							sublayer.setCartoCSS("#world_table {polygon-fill: #000;polygon-opacity: 0.7;line-color: #3E7BB6;line-width: 0.5;line-opacity: 1;}");
+							return true;
+						},
+						layer2: function(){
+							
+							sublayer.setSQL("SELECT * FROM world_table WHERE cartodb_id > 100");
+							sublayer.setCartoCSS("#world_table {polygon-fill: #3E7BB6;polygon-opacity: 0.7;line-color: #FFF;line-width: 0.5;line-opacity: 1;}");
+							return true;
+						}
+					}
+
+				$('#selector').change(function() {
+					 LayerActions[$(this).val()]();
+				});	
+
+				});
+		}
+
+
+		window.onload = init;
+
+	</script>
+</body>
+</html><!-- 
+LICENSE#
+
+This block appears to have no license. Please contact the author to request a license. -->

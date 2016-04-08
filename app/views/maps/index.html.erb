@@ -1,74 +1,83 @@
-		<div id="dashboard">
-      <h3 class="Title Title--xs">Welcome to Madrid's Geoportal!</h3>
+
+    <div id="dashboard">
+      <h3 class="Title Title--xs">Welcome to GeoMadrid!</h3>
         <br>
           <button id="locate_me">Locate me!</button>
+
+          <div class="dropdown">
+              <div id="myDropdown" class="dropdown-content">
+                <a href="#">Movilidad</a>
+                <br>
+                <a href="#">Seguridad</a>
+                <br>
+                <a href="#">Cultura</a>
+          </div>
+
+
           <asside class="layers">
           
-        <div class="dropdown">
-          <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-        </div>
 
         <div class="radius" style="width: 500px;"> 
           <p>
+          <br>
             <label for="amount">Radio:</label>
             <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-          Hello
           </p>
         <div id="header"></div>
         <div id="slider-range-min"></div>
         </div>
         </div>
-        	<h2>Layers</h2>
+          <h2>Layers</h2>
             <ul>
-            	<li class="layer">
-            	  <input type="checkbox" id="vias_ciclistas" name="layer">
-            	  <label for="vias_ciclistas">Vias Ciclistas</label>
-            	</li>
-            	<li class="layer">
-            	  <input type="checkbox" id="carril_bus" name="layer">
-            	  <label for="carril_bus">Carril Bus</label>
-            	</li>
-            	<li class="layer">
-            	  <input type="checkbox" id="camaras" name="layer">
-            	  <label for="camaras">Camaras de Trafico</label>
-              </li>
-    	        <li class="layer">
-  	            <input type="checkbox" id="incidentes_trafico" name="layer">
-            	  <label for="incidentes_trafico">Incidentes de Trafico</label>
-            	</li>
               <li class="layer">
-            	  <input type="checkbox" id="estaciones_tren" name="layer">
-            	  <label for="estaciones_tren">Estaciones de tren</label>
-     	        </li>
-    	        <li class="layer">
-            	  <input type="checkbox" id="autobuses_urbanos" name="layer">
-            	  <label for="autobuses_urbanos">Autobuses urbanos</label>
-    	        </li>
-    	        <li class="layer">
-            	  <input type="checkbox" id="autobuses_interurbanos" name="layer">
-            	  <label for="autobuses_interurbanos">Autobuses interurbanos</label>
-    	        </li>
-    	        <li class="layer">
-            	  <input type="checkbox" id="paradas_metro" name="layer">
-            	  <label for="paradas_metro">Paradas Metro</label>
+                <input type="checkbox" id="cyclist_routes" name="layer">
+                <label for="cyclist_routes">Vias Ciclistas</label>
               </li>
               <li class="layer">
-            	  <input type="checkbox" id="paradas_metro_ligero" name="layer">
-            	  <label for="paradas_metro_ligero">Metro Ligero</label>
+                <input type="checkbox" id="bus_path" name="layer">
+                <label for="bus_path">Carril Bus</label>
               </li>
-    	        <li class="layer">
-            	  <input type="checkbox" id="paradas_taxi" name="layer">
-            	  <label for="paradas_taxi">Paradas Taxi</label>
-            	</li>
+              <li class="layer">
+                <input type="checkbox" id="traffic_cameras" name="layer">
+                <label for="traffic_cameras">Camaras de Trafico</label>
+              </li>
+              <li class="layer">
+                <input type="checkbox" id="traffic_incidents" name="layer">
+                <label for="traffic_incidents">Incidentes de Trafico</label>
+              </li>
+              <li class="layer">
+                <input type="checkbox" id="train_stations" name="layer">
+                <label for="train_stations">Estaciones de tren</label>
+              </li>
+              <li class="layer">
+                <input type="checkbox" id="urban_buses" name="layer">
+                <label for="urban_buses">Autobuses urbanos</label>
+              </li>
+              <li class="layer">
+                <input type="checkbox" id="interurban_buses" name="layer">
+                <label for="interurban_buses">Autobuses interurbanos</label>
+              </li>
+              <li class="layer">
+                <input type="checkbox" id="metro_stops" name="layer">
+                <label for="metro_stops">Paradas Metro</label>
+              </li>
+              <li class="layer">
+                <input type="checkbox" id="light_metro_stops" name="layer">
+                <label for="light_metro_stops">Metro Ligero</label>
+              </li>
+              <li class="layer">
+                <input type="checkbox" id="taxi_stops" name="layer">
+                <label for="taxi_stops">Paradas Taxi</label>
+              </li>
             </ul>
          </asside>
-   		</div>		
-   		<div id="map"></div>
-		<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+         <footer>
+           <p>&copy; Jaime de Mora & Friends</p>
+         </footer>
+      </div>    
+      <div id="map"></div>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-   	<%= javascript_include_tag 'mapa' %>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <%= javascript_include_tag 'mapa' %>
