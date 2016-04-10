@@ -5,10 +5,49 @@ $( document ).on('ready', function(){
   var map =  L.map('map', {
     zoomControl: true,
     center: [40.4000, -3.7167],
-    searchbox: true,
-    zoom: 12,
+    zoom: 12
   });
 
+  // var drawnItems = new L.FeatureGroup();
+  // map.addLayer(drawnItems);
+
+  // var drawControl = new L.Control.Draw({
+  //     edit: {
+  //         featureGroup: drawnItems
+  //     }
+  // });
+  // map.addControl(drawControl);
+
+  // var selectLayer = L.geoJson().addTo(map); //add empty geojson layer for selections
+
+
+  // var options = {
+  //     position: 'topright',
+  //     draw: {
+  //         polyline:false,
+  //         polygon: {
+  //             allowIntersection: false, // Restricts shapes to simple polygons
+  //             drawError: {
+  //                 color: '#e1e100', // Color the shape will turn when intersects
+  //                 message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+  //             },
+  //             shapeOptions: {
+  //                 color: '#bada55'
+  //             }
+  //         },
+  //         circle: false, // Turns off this drawing tool
+  //         rectangle: {
+  //             shapeOptions: {
+  //                 clickable: false
+  //             }
+  //         },
+  //         marker:false
+  //     }
+  // };
+
+  // var drawControl = new L.Control.Draw(options);
+  // map.addControl(drawControl);
+  // $('.leaflet-draw-toolbar').hide();
 
   var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
