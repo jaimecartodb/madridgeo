@@ -8,8 +8,69 @@ $( document ).on('ready', function(){
     zoom: 12
   });
 
-  // var drawnItems = new L.FeatureGroup();
-  // map.addLayer(drawnItems);
+  var LeafIcon = L.Icon.extend({
+    options: {
+      iconSize:     [38, 95],
+      iconAnchor:   [22, 94],
+      popupAnchor:  [-3, -76]
+    }
+  });
+
+  var markerIcon = new LeafIcon({
+    iconUrl: 'http://com.cartodb.users-assets.production.s3.amazonaws.com/simpleicon/map43.svg'
+    });
+
+  var drawnItems = new L.FeatureGroup();
+  map.addLayer(drawnItems);
+
+  var drawControl = new L.Control.Draw({
+    position: 'bottomright',
+    draw: {
+      polygon: {
+        shapeOptions: {
+          color: '#019'
+        },
+        allowIntersection: false,
+        drawError: {
+          color: '#019',
+          timeout: 1000
+        },
+        showArea: true,
+        metric: false,
+        repeatMode: true
+      },
+      polyline: {
+        shapeOptions: {
+          color: '#019'
+        },
+      },
+      rectangle: false,
+      circle: {
+        shapeOptions: {
+          color: '#019'
+        },
+      },
+      marker: {
+        icon: markerIcon
+      },
+    },
+    edit: {
+      featureGroup: drawnItems
+    }
+  });
+  map.addControl(drawControl);
+
+  map.on('draw:created', function (e) {
+    var type = e.layerType,
+      layer = e.layer;
+
+    if (type === 'marker') {
+      layer.bindPopup('A popup!');
+    }
+
+    drawnItems.addLayer(layer);
+  });
+
 
   // var drawControl = new L.Control.Draw({
   //     edit: {
