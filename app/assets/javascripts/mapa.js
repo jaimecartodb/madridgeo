@@ -69,46 +69,9 @@ $( document ).on('ready', function(){
     }
 
     drawnItems.addLayer(layer);
+    
   });
 
-
-  // var drawControl = new L.Control.Draw({
-  //     edit: {
-  //         featureGroup: drawnItems
-  //     }
-  // });
-  // map.addControl(drawControl);
-
-  // var selectLayer = L.geoJson().addTo(map); //add empty geojson layer for selections
-
-
-  // var options = {
-  //     position: 'topright',
-  //     draw: {
-  //         polyline:false,
-  //         polygon: {
-  //             allowIntersection: false, // Restricts shapes to simple polygons
-  //             drawError: {
-  //                 color: '#e1e100', // Color the shape will turn when intersects
-  //                 message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-  //             },
-  //             shapeOptions: {
-  //                 color: '#bada55'
-  //             }
-  //         },
-  //         circle: false, // Turns off this drawing tool
-  //         rectangle: {
-  //             shapeOptions: {
-  //                 clickable: false
-  //             }
-  //         },
-  //         marker:false
-  //     }
-  // };
-
-  // var drawControl = new L.Control.Draw(options);
-  // map.addControl(drawControl);
-  // $('.leaflet-draw-toolbar').hide();
 
   var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -194,49 +157,43 @@ $( document ).on('ready', function(){
         sql: 'SELECT * FROM paradas_taxi',
         cartocss: '#paradas_taxi{ marker-fill-opacity: 0.9; marker-fill: #055D00;}',
         interactivity: 'cartodb_id, name'
-      }
+      },
+      'madrid_neighbours': {
+        sql: 'SELECT * FROM madrid_barrios_parametros',
+        cartocss: '#madrid_barrios_parametros{polygon-fill: #FFFFB2; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1; } #madrid_barrios_parametros [ seguridad <= 5] { polygon-fill: #B10026; } #madrid_barrios_parametros [ seguridad <= 5] { polygon-fill: #E31A1C; } #madrid_barrios_parametros [ seguridad <= 4] {   polygon-fill: #FC4E2A; } #madrid_barrios_parametros [ seguridad <= 4] {   polygon-fill: #FD8D3C; } #madrid_barrios_parametros [ seguridad <= 3] { polygon-fill: #FEB24C; } #madrid_barrios_parametros [ seguridad <= 3] {   polygon-fill: #FED976; } #madrid_barrios_parametros [ seguridad <= 2] {    polygon-fill: #FFFFB2; }'
+        }
     };
 
-    // {
-    //   'cyclist_routes': ['cartodb_id, mass'],
-    //   'bus_path': {
-    //     sql: 'SELECT * FROM bus',
-    //     cartocss: '#bus{line-color: #FF6600; line-width: 2; line-opacity: 0.7;}'
-    //   },
-    //   'traffic_cameras': {
-    //     sql: 'SELECT * FROM camaras',
-    //     cartocss: '#camaras{marker-fill-opacity: 0.9; marker-fill: #FF6600; marker-allow-overlap: true;}'
-    //   },
-    //   'traffic_incidents': {
-    //     sql: 'SELECT * FROM incidentes_trafico',
-    //     cartocss: '#incidentes_trafico{marker-fill-opacity: 0.9; marker-fill: #0080ff; marker-allow-overlap: true;}'
-    //   },
-    //   'train_stations': {
-    //     sql: 'SELECT * FROM estaciones_tren',
-    //     cartocss: '#estaciones_tren{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-    //   },
-    //   'urban_buses': {
-    //     sql: 'SELECT * FROM autobuses_urbanos',
-    //     cartocss: '#autobuses_urbanos{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-    //   },
-    //   'interurban_buses': {
-    //     sql: 'SELECT * FROM autobuses_interurbanos',
-    //     cartocss: '#autobuses_interurbanos{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-    //   },
-    //   'metro_stops': {
-    //     sql: 'SELECT * FROM paradas_metro',
-    //     cartocss: '#paradas_metro{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-    //   },
-    //   'light_metro_stops': {
-    //     sql: 'SELECT * FROM paradas_metro_ligero',
-    //     cartocss: '#paradas_metro_ligero{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}'
-    //   },
-    //   'taxi_stops': {
-    //     sql: 'SELECT * FROM paradas_taxi',
-    //     cartocss: '#paradas_taxi{ marker-fill-opacity: 0.9; marker-fill: #FF6600;}',
-    //     interactivity: 'cartodb_id, name'
-    //   }
-    // }
+    var columns = {
+      'cyclist_routes': ['cartodb_id', 'nombre_via'],
+      'bus_path': ['cartodb_id', 'observ'],
+      'traffic_cameras': ['cartodb_id', 'name'],
+      'traffic_incidents': ['cartodb_id', 'name'],
+      'train_stations': ['cartodb_id', 'name'],
+      'urban_buses': ['cartodb_id', 'name'],
+      'interurban_buses': ['cartodb_id', 'name'],
+      'metro_stops': ['cartodb_id', 'name'],
+      'light_metro_stops': ['cartodb_id', 'name'],
+      'taxi_stops': ['cartodb_id', 'name'],
+      'madrid_neighbours': ['cartodb_id', 'barrio']
+    }
+
+//   var coolTemplate = '<script type="infowindow/html" id="infowindow_template">
+//   <div class="cartodb-popup v2">
+//     <a href="#close" class="cartodb-popup-close-button close">x</a>
+//      <div class="cartodb-popup-content-wrapper">
+//        <div class="cartodb-popup-header">
+//          <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light.png"></src>
+//        </div>
+//        <div class="cartodb-popup-content">
+//          <!-- content.data contains the field info -->
+//          <h4>City: </h4>
+//          <p>{{content.data.name}}</p>
+//        </div>
+//      </div>
+//      <div class="cartodb-popup-tip-container"></div>
+//   </div>
+// </script>';
 
     // $(function() {
     //        $( "#slider-range-min" ).slider({
@@ -273,7 +230,10 @@ $( document ).on('ready', function(){
      		$.each($("input[name='layer']:checked"), function(){
      		  layer.createSubLayer(layers[$(this).attr("id")]);
           var numSubLayers = layer.getSubLayerCount();
-          cdb.vis.Vis.addInfowindow(map, layer.getSubLayer(numSubLayers-1), ['cartodb_id']);
+          console.log(columns[$(this).attr("id")]);
+          cdb.vis.Vis.addInfowindow(map, layer.getSubLayer(numSubLayers-1), columns[$(this).attr("id")], {
+            infowindowTemplate: '<p>{{name}}</p>'
+          });
      		});
 
 
