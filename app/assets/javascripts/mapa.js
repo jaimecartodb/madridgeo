@@ -175,7 +175,10 @@ $( document ).on('ready', function(){
       'madrid_neighbours': {
         sql: 'SELECT * FROM madrid_barrios_parametros',
         cartocss: '#madrid_barrios_parametros{polygon-fill: #FFFFB2; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1; } #madrid_barrios_parametros [ seguridad <= 5] { polygon-fill: #B10026; } #madrid_barrios_parametros [ seguridad <= 5] { polygon-fill: #E31A1C; } #madrid_barrios_parametros [ seguridad <= 4] {   polygon-fill: #FC4E2A; } #madrid_barrios_parametros [ seguridad <= 4] {   polygon-fill: #FD8D3C; } #madrid_barrios_parametros [ seguridad <= 3] { polygon-fill: #FEB24C; } #madrid_barrios_parametros [ seguridad <= 3] {   polygon-fill: #FED976; } #madrid_barrios_parametros [ seguridad <= 2] {    polygon-fill: #FFFFB2; }'
-        }
+        },
+      'madrid_neighbours_boundaries': {
+        sql: 'SELECT * FROM madrid_barrios_parametros',
+        cartocss: '#madrid_barrios_parametros{polygon-fill: #FFFFB2; polygon-opacity: 0; line-color: #055D00; line-width: 1; line-opacity: 1; } #madrid_barrios_parametros::labels {text-name: [barrio]; text-face-name: "DejaVu Sans Book"; text-size: 12; text-label-position-tolerance: 10; text-fill: #0F3B82; text-halo-fill: #FFF; text-halo-radius: 0.5; text-dy: -15; text-allow-overlap: false; text-placement: interior; text-placement-type: simple; } #madrid_barrios_parametros [ seguridad <= 5] {polygon-fill: #B10026; } #madrid_barrios_parametros [ seguridad <= 5] {polygon-fill: #E31A1C; } #madrid_barrios_parametros [ seguridad <= 4] {polygon-fill: #FC4E2A; } #madrid_barrios_parametros [ seguridad <= 4] {polygon-fill: #FD8D3C; } #madrid_barrios_parametros [ seguridad <= 3] {polygon-fill: #FEB24C; } #madrid_barrios_parametros [ seguridad <= 3] {polygon-fill: #FED976; } #madrid_barrios_parametros [ seguridad <= 2] {polygon-fill: #FFFFB2; }'}
     };
 
     var columns = {

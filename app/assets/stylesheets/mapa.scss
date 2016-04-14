@@ -29,6 +29,7 @@ html { height: 100%;}
 }
 
 #sidebar-wrapper {
+	position: absolute;
     z-index: 1000;
     left: 220px;
     width: 0;
@@ -68,7 +69,7 @@ html { height: 100%;}
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 220px;
+    width: 320px;
     margin: 0;
     padding: 0;
     list-style: none;

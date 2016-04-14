@@ -1,50 +1,6 @@
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-                <ul class="nav sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#">
-                           Brand
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Events</a>
-                    </li>
-                    <li>
-                        <a href="#">Team</a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li class="dropdown-header">Dropdown heading</li>
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                      </ul>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/maridlcrmn">Follow me</a>
-                    </li>
-                </ul>
-            </nav>
-
-    <div id="dashboard">
+<!--     <div id="dashboard">
       <h3 class="Title Title--xs">Welcome to GeoMadrid!</h3>
         <br>
-          <button id="locate_me">Locate me!</button>
 
           <div class="dropdown">
               <div id="myDropdown" class="dropdown-content">
@@ -72,8 +28,12 @@
           <h2>Movilidad</h2>
             <ul>
             <li class="layer">
+              <input type="checkbox" id="madrid_neighbours_boundaries" name="layer">
+              <label for="madrid_neighbours">Madrid por Barrios</label>
+            </li>
+            <li class="layer">
               <input type="checkbox" id="madrid_neighbours" name="layer">
-              <label for="madrid_neighbours">Barrios</label>
+              <label for="madrid_neighbours">Barrios por seguridad</label>
             </li>
               <li class="layer">
                 <input type="checkbox" id="cyclist_routes" name="layer">
@@ -120,7 +80,8 @@
          <footer>
            <p>&copy; Jaime de Mora & Friends</p>
          </footer>
-      </div>    
+      </div>     -->
+      <button id="locate_me">Locate me!</button>
       <div id="map"></div>
       <div id='selector_menu'>
       <select id='selector'>
