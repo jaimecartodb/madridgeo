@@ -1,12 +1,52 @@
 
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#">
+                           Brand
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Events</a>
+                    </li>
+                    <li>
+                        <a href="#">Team</a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">Dropdown heading</li>
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/maridlcrmn">Follow me</a>
+                    </li>
+                </ul>
+            </nav>
+
     <div id="dashboard">
       <h3 class="Title Title--xs">Welcome to GeoMadrid!</h3>
         <br>
           <button id="locate_me">Locate me!</button>
 
           <div class="dropdown">
-
-
               <div id="myDropdown" class="dropdown-content">
                 <a href="#">Movilidad</a>
                 <br>
@@ -18,71 +58,7 @@
 
           <asside class="layers">
           
-        <div class="nav-wrapper">
-            <ul id="nav"
-                class="nav"
-                data-slim-scroll
-                data-collapse-nav
-                data-highlight-active>
-                <li class="nav-title">
-                    <span data-translate="NAVIGATION"></span>
-                </li>
-                <li><a md-button aria-label="meanu" href="#/dashboard"> <i class="zmdi zmdi-home"></i><span data-translate="DASHBOARD"></span> </a></li>
-                <li>
-                    <a md-button aria-label="meanu" href="#/ui"><i class="zmdi zmdi-case"></i><span data-translate="UI_KIT"></span></a>
-                    <ul>
-                        <li><a md-button aria-label="meanu" href="#/ui/buttons"><i class="fa fa-angle-right"></i><span data-translate="BUTTONS"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/icons"><i class="fa fa-angle-right"></i><span data-translate="ICONS"></span> <span class="badge badge-info">3</span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/cards"><i class="fa fa-angle-right"></i><span data-translate="CARDS"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/typography"><i class="fa fa-angle-right"></i><span data-translate="TYPOGRAPHY"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/grids"><i class="fa fa-angle-right"></i><span data-translate="GRIDS"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/lists"><i class="fa fa-angle-right"></i><span data-translate="LISTS"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/components"><i class="fa fa-angle-right"></i><span data-translate="COMPONENTS"></span> <span class="badge badge-danger">20</span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/pricing-tables"><i class="fa fa-angle-right"></i><span data-translate="PRICING_TABLES"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/timeline"><i class="fa fa-angle-right"></i><span data-translate="TIMELINE"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/ui/maps"><i class="fa fa-angle-right"></i><span data-translate="MAPS"></span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a md-button aria-label="meanu" href="#/pages"><i class="zmdi zmdi-pages"></i><span data-translate="PAGES"></span></a>
-                    <ul>
-                        <li><a md-button aria-label="meanu" href="#/pages/signin"><i class="fa fa-angle-right"></i><span data-translate="SIGN_IN"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/pages/signup"><i class="fa fa-angle-right"></i><span data-translate="SIGN_UP"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/pages/forgot-password"><i class="fa fa-angle-right"></i><span data-translate="FORGOT_PASSWORD"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/pages/profile"><i class="fa fa-angle-right"></i><span data-translate="USER_PROFILE"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/pages/invoice"><i class="fa fa-angle-right"></i><span data-translate="INVOICE"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/pages/404"><i class="fa fa-angle-right"></i>404 <span data-translate="ERROR"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/pages/500"><i class="fa fa-angle-right"></i>500 <span data-translate="ERROR"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/pages/blank"><i class="fa fa-angle-right"></i><span data-translate="BLANK_PAGE"></span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a md-button aria-label="meanu" href="#/table"><i class="zmdi zmdi-view-list"></i><span data-translate="TABLES"></span></a>
-                    <ul>
-                        <li><a md-button aria-label="meanu" href="#/tables/static"><i class="fa fa-angle-right"></i><span data-translate="STATIC_TABLES"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/tables/responsive"><i class="fa fa-angle-right"></i><span data-translate="RESPONSIVE_TABLES"></span> <span class="badge badge-info">2</span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/tables/dynamic"><i class="fa fa-angle-right"></i><span data-translate="DYNAMIC_TABLES"></span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a md-button aria-label="meanu" href="#/form"><i class="zmdi zmdi-edit"></i><span data-translate="FORMS"></span></a>
-                    <ul>
-                        <li><a md-button aria-label="meanu" href="#/forms/layouts"><i class="fa fa-angle-right"></i><span data-translate="FORM_LAYOUTS"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/forms/elements"><i class="fa fa-angle-right"></i><span data-translate="FORM_ELEMENTS"></span> <span class="badge badge-info">14</span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/forms/validation"><i class="fa fa-angle-right"></i><span data-translate="FORM_VALIDATION"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/forms/wizard"><i class="fa fa-angle-right"></i><span data-translate="FORM_WIZARD"></span></a></li>
-                    </ul>
-                </li>
-               <li>
-                    <a md-button aria-label="meanu" href="#/charts"><i class="zmdi zmdi-chart"></i><span data-translate="CHARTS"></span></a>
-                    <ul>
-                        <li><a md-button aria-label="meanu" href="#/charts/chartjs"><i class="fa fa-angle-right"></i>ChartJS <span data-translate="CHARTS"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/charts/flot"><i class="fa fa-angle-right"></i>Flot <span data-translate="CHARTS"></span></a></li>
-                        <li><a md-button aria-label="meanu" href="#/charts/charts"><i class="fa fa-angle-right"></i>Other <span data-translate="CHARTS"></span></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+
         <div class="radius" style="width: 500px;"> 
           <p>
           <br>
@@ -95,6 +71,10 @@
         </div>
           <h2>Movilidad</h2>
             <ul>
+            <li class="layer">
+              <input type="checkbox" id="madrid_neighbours" name="layer">
+              <label for="madrid_neighbours">Barrios</label>
+            </li>
               <li class="layer">
                 <input type="checkbox" id="cyclist_routes" name="layer">
                 <label for="cyclist_routes">Vias Ciclistas</label>
@@ -135,10 +115,6 @@
                 <input type="checkbox" id="taxi_stops" name="layer">
                 <label for="taxi_stops">Paradas Taxi</label>
               </li>
-              <li class="layer">
-                <input type="checkbox" id="madrid_neighbours" name="layer">
-                <label for="madrid_neighbours">Barrios</label>
-              </li>
             </ul>
          </asside>
          <footer>
@@ -146,6 +122,11 @@
          </footer>
       </div>    
       <div id="map"></div>
+      <div id='selector_menu'>
+      <select id='selector'>
+        <option value='OSM'>OSM map</option>
+        <option value='stamen'>Stamen map</option>
+      </select>
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>

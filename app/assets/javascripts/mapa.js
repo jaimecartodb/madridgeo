@@ -1,5 +1,31 @@
 $( document ).on('ready', function(){
 
+  var trigger = $('.hamburger'),
+  overlay = $('.overlay'),
+  isClosed = false;
+
+  trigger.click(function () {
+        hamburger_cross();      
+      });
+
+      function hamburger_cross() {
+
+        if (isClosed == true) {          
+          overlay.hide();
+          trigger.removeClass('is-open');
+          trigger.addClass('is-closed');
+          isClosed = false;
+        } else {   
+          overlay.show();
+          trigger.removeClass('is-closed');
+          trigger.addClass('is-open');
+          isClosed = true;
+        }
+    }
+    
+    $('[data-toggle="offcanvas"]').click(function () {
+          $('#wrapper').toggleClass('toggled');
+    }); 
 
 	//    console.log('init map'); 
   var map =  L.map('map', {
@@ -45,11 +71,7 @@ $( document ).on('ready', function(){
         },
       },
       rectangle: false,
-      circle: {
-        shapeOptions: {
-          color: '#019'
-        },
-      },
+      circle: false,
       marker: {
         icon: markerIcon
       },
@@ -60,32 +82,24 @@ $( document ).on('ready', function(){
   });
   map.addControl(drawControl);
 
-  map.on('draw:created', function (e) {
-    var type = e.layerType,
-      layer = e.layer;
 
-    if (type === 'marker') {
-      layer.bindPopup('A popup!');
-    }
-
-    drawnItems.addLayer(layer);
-    
-  });
 
 
   var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+  zIndex:-1
   }).addTo(map);
 
-  // var basemap2 =  L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-  //     attribution: 'Dark'
-  //   });
-  // var osm = {
-  //   'osm basemap': basemap
-  // };
-  // var dark_matter = {
-  //   'dark_matter': basemap2
-  // };
+  var basemap2 =  L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+      attribution: 'Dark',
+      zIndex:-1
+    });
+  // // var osm = {
+  // //   'osm basemap': basemap
+  // // };
+  // // var dark_matter = {
+  // //   'dark_matter': basemap2
+  // // };
 
   // L.control.layers(osm, dark_matter).addTo(map);
 
@@ -225,6 +239,8 @@ $( document ).on('ready', function(){
     })
     .addTo(map)
     .done(function(layer){
+      layer.setZIndex(9000);
+      window.cdb_layer=layer;
      	$("input[name='layer']").change(function(){
      		layer.getSubLayers().forEach(function(sublayer){sublayer.remove()});
      		$.each($("input[name='layer']:checked"), function(){
@@ -235,37 +251,67 @@ $( document ).on('ready', function(){
             infowindowTemplate: '<p>{{name}}</p>'
           });
      		});
+        window.cdb_layer.getSubLayers().forEach(function(l){
+          l.sql_origin = l.getSQL();
+        });
 
 
-      // var LayerActions = {
-      //   default: function(){
-      //     if (map.hasLayer(basemap) || (map.hasLayer(basemap2))){
-      //       map.removeLayer(basemap);
-      //       map.removeLayer(basemap2);
-      //     } 
+      });
+      var LayerActions = {
+        OSM: function(){
+          if (map.hasLayer(basemap) || (map.hasLayer(basemap2))){
+            map.removeLayer(basemap);
+            map.removeLayer(basemap2);
+          } 
+          console.log('blabla')
+          map.addLayer(basemap);
+          return true;
+        },
 
-      //     map.addLayer(basemap1);
-      //     return true;
-      //   },
+        stamen: function(){
+          if (map.hasLayer(basemap) || (map.hasLayer(basemap2))){
+            map.removeLayer(basemap);
+            map.removeLayer(basemap2);
+          }
 
-      //   stamen: function(){
-      //     if (map.hasLayer(basemap) || (map.hasLayer(basemap2))){
-      //       map.removeLayer(basemap);
-      //       map.removeLayer(basemap2);
-      //     }
+          map.addLayer(basemap2);
+          return true;
+        }
+      }
 
-      //     map.addLayer(basemap2);
-      //     return true;
-      //   }
-      // }
+      
       
       $('#selector').change(function() {
         LayerActions[$(this).val()]();
       });
-      });
       var v = cdb.vis.Overlay.create('search', map.viz, {})
       v.show();
       $('#map').append(v.render().el);
+
+      map.on('draw:created', function (e) {
+        var getPolWKT = function(polygon){
+          return 'POLYGON ((' + 
+                polygon.toGeoJSON().geometry.coordinates[0].map(function(p){
+                  return p[0] + ' ' + p[1]})
+                .join(',') + '))';
+        }
+        var type = e.layerType,
+          layerdrawn = e.layer;
+
+        window.cdb_layer.getSubLayers().forEach(function(l){
+          var sql = l.sql_origin + " WHERE ST_INTERSECTS(the_geom, st_geomfromtext('" + getPolWKT(e.layer) + "', 4326))";
+          l.setSQL(sql);
+        });
+        // if (type === 'marker') {
+        //   layerdrawn.bindPopup('A popup!');
+        // }
+        drawnItems.getLayers().forEach(function(d){
+          drawnItems.removeLayer(d);
+        });
+
+        drawnItems.addLayer(layerdrawn);
+        
+      });
     });
 
 });
