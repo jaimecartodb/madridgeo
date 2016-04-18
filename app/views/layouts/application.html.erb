@@ -22,6 +22,7 @@
 				#map {
 					height: 100%;
 					padding: 0%;
+					margin-left: 320px;
 				}
 				#dashboard {
 					height: 0%;
@@ -29,10 +30,10 @@
 					margin-right: 0%;
 					border-right: 2px solid #333;
 				}
-				#locate_me{
+				#download{
 				    position: absolute;
 				    bottom: 50px;
-				    left: 440px;
+				    left: 330px;
 				    z-index: 9000;
 				  }
 				#selector_menu{
@@ -41,6 +42,12 @@
 				    right: 50px;
 				    z-index: 9000;
 				  }
+				  #locate_me{
+				  	position: absolute;
+				  	bottom: 80px;
+				  	left: 330px;
+				  	z-index: 9000;
+				    }
 			</style>
 
 <!-- in case we need it for the slider			<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -53,66 +60,125 @@
 	 <div id="wrapper">
 	        <div class="overlay"></div>
 	    
-	        <!-- Sidebar -->
 	        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
 	            <ul class="nav sidebar-nav">
 	                <li class="sidebar-brand">
 	                    <a href="#">
-	                       Welcome to <br>
+	                       Bienvenido a <br>
 	                       GeoMadrid! 
 	                    </a>
 	                </li>
-	                <li>
+<!-- 	                <li>
 	                    <a href="#">Home</a>
 	                </li>
-	                <li>
-	                    <a href="#">About</a>
+ -->	                <li>
+	                    <a href="#">Demografía</a>
 	                </li>
 	                <li>
-	                    <a href="#">Events</a>
+	                    <a href="#">Vivienda</a>
 	                </li>
 	                <li>
-	                    <a href="#">Team</a>
+	                    <a href="#">Deporte</a>
 	                </li>
 	                <li class="dropdown">
-	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
+	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorías por barrios <span class="caret"></span></a>
 	                  <ul class="dropdown-menu" role="menu">
-	                    <li class="dropdown-header">Dropdown heading</li>
-	                    <li><a href="#">Action</a></li>
-	                    <li><a href="#">Another action</a></li>
-	                    <li><a href="#">Something else here</a></li>
-	                    <li><a href="#">Separated link</a></li>
-	                    <li><a href="#">One more separated link</a></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="madrid_neighbours_boundaries" name="layer">
+	                    <label for="madrid_neighbours_boundaries">Madrid por Barrios</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="madrid_neighbours" name="layer">
+	                    <label for="madrid_neighbours">Seguridad por Barrios</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="madrid_clean" name="layer">
+	                    <label for="madrid_clean">Barrios por limpieza</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="madrid_leisure" name="layer">
+	                    <label for="madrid_leisure">Barrios por ocio</label></div><br><br/></li>
+	                  </ul>
+	                </li>
+	                <li class="dropdown">
+	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movilidad <span class="caret"></span></a>
+	                  <ul class="dropdown-menu" role="menu">
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="cyclist_routes" name="layer">
+	                    <label for="cyclist_routes">Vías ciclistas</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="bus_path" name="layer">
+	                    <label for="bus_path">Carril Taxi</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="traffic_cameras" name="layer">
+	                    <label for="traffic_cameras">Cámaras de tráfico</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="traffic_incidents" name="layer">
+	                    <label for="traffic_incidents">Accidentes de tráfico</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="train_stations" name="layer">
+	                    <label for="train_stations">Estaciones de Tren</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="urban_buses" name="layer">
+	                    <label for="urban_buses">Paradas de autobús urbano</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="interurban_buses" name="layer">
+	                    <label for="interurban_buses">Autobús interurbano</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="metro_stops" name="layer">
+	                    <label for="metro_stops">Paradas de metro</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="light_metro_stops" name="layer">
+	                    <label for="light_metro_stops">Metro ligero</label></div><br><br/></li>
+	                    <li>
+	                    <div id='test' style="position: absolute;left: 15px; color: #FFF; opacity: 0.7">
+	                    <input class="layer" type="checkbox" id="taxi_stops" name="layer">
+	                    <label for="taxi_stops">Paradas de taxi</label></div><br><br/></li><br><br/>
 	                  </ul>
 	                </li>
 	                <li>
-	                    <a href="#">Services</a>
+	                    <a href="#">Seguridad</a>
 	                </li>
 	                <li>
-	                    <a href="#">Contact</a>
+	                    <a href="#">Contacto</a>
 	                </li>
 	                <li>
-	                    <a href="https://twitter.com/maridlcrmn">Follow me</a>
+	                    <a href="https://twitter.com/jaimedemora">Contribuye!!</a>
 	                </li>
-	            </ul>
-	        </nav>
-	        <!-- /#sidebar-wrapper -->
+<!-- 	             
+ -->	            </ul>
 
-	        <!-- Page Content -->
-	        <div id="page-content-wrapper">
-	            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-	                <span class="hamb-top"></span>
-	    			<span class="hamb-middle"></span>
-					<span class="hamb-bottom"></span>
-	            </button>                         
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
+	        </nav>
+
+
+	       </div>
+	       <button id="locate_me">Locate me!</button>
+	       <button id="download">Descargar Dataset</button>
+	       <div id="map"></div>
+	       <div id='selector_menu'>
+	       <select id='selector'>
+	         <option value='OSM'>OSM map</option>
+	         <option value='stamen'>Stamen map</option>
+	       </select>
+
+
 	        <%= yield %>
 
-	    </div>
-	    <!-- /#wrapper -->
+
+	    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+	    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	    <script src="http://leaflet.github.io/Leaflet.draw/leaflet.draw.js"></script>
+	    <%= javascript_include_tag 'application' %>
 
 	</body>
 </html>
