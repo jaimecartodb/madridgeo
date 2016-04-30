@@ -1,6 +1,8 @@
-MadridGeo is an Open Data Geoportal for the city of Madrid. 
-It wants to increase transparency and provide citizens with added information and know-how about what's happening in their city.
+MadridGeo is an Open Data Geoportal for the city of Madrid. <br>
 
-Version 1.0 is still in beta, version 2.0 will include new features and more than 50 new datasets. 
+It wants to <b>increase transparency</b> from the Government and provide citizens with added information and know-how about what's happening in their city.
+
+
+Version 1.0 is still in beta, version 2.0 will include new features and more than 50 new datasets. <br>
 
 Contributors are welcome!
